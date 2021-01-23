@@ -163,7 +163,7 @@ class Network(nn.Module):
         ]
     
     def new(self):
-        model_new = Network(self._C, self._num_classes, self._layers, self._criterion, switches_normal=self.switches_reduce, switches_reduce=self.switches_reduce, p = self.p).cuda()
+        model_new = Network(self._C, self._num_classes, self._layers, self._criterion, switches_normal=self.switches_normal, switches_reduce=self.switches_reduce, p = self.p).cuda()
         for x, y in zip(model_new.arch_parameters(), self.arch_parameters()):
             x.data.copy_(y.data)
         return model_new
