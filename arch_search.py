@@ -22,7 +22,7 @@ from resnet import *
 
 parser = argparse.ArgumentParser("cifar")
 parser.add_argument('--workers', type=int, default=2, help='number of workers to load dataset')
-parser.add_argument('--batch_size', type=int, default=64, help='batch size')
+parser.add_argument('--batch_size', type=int, default=48, help='batch size')
 parser.add_argument('--learning_rate', type=float, default=0.025, help='init learning rate')
 parser.add_argument('--learning_rate_min', type=float, default=0.0, help='min learning rate')
 parser.add_argument('--momentum', type=float, default=0.9, help='momentum')
@@ -157,7 +157,7 @@ def main():
             else:
                 model.p = float(drop_rate[sp]) * np.exp(-(epoch - eps_no_arch) * scale_factor) 
                 model.update_p()                
-                train_acc, train_obj = train(train_queue, valid_queue, unlabeled_queue, model, student, architect, criterion, criterion_stud, optimizer, optimizer_stud, lr, network_params, train_arch=False)
+                train_acc, train_obj = train(train_queue, valid_queue, unlabeled_queue, model, student, architect, criterion, criterion_stud, optimizer, optimizer_stud, lr, network_params, train_arch=True)
             logging.info('Train_acc %f', train_acc)
             epoch_duration = time.time() - epoch_start
             logging.info('Epoch time: %ds', epoch_duration)
